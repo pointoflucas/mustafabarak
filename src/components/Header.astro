@@ -1,20 +1,25 @@
 ---
 import { site, nav } from '../data/site';
+import { withBase } from '../utils/url';
 
 const currentPath = Astro.url.pathname;
 ---
 
 <header>
   <nav>
-    <a href="/" class="logo">{site.name}</a>
+    <a href={withBase('/')} class="logo">{site.name}</a>
     <ul>
-      {nav.map(item => (
-        <li>
-          <a href={item.href} class={currentPath === item.href ? 'active' : ''}>
-            {item.label}
-          </a>
-        </li>
-      ))}
+      {nav.map(item => {
+        const href = withBase(item.href);
+        const isActive = currentPath === href || currentPath === `${href}/`;
+        return (
+          <li>
+            <a href={href} class={isActive ? 'active' : ''}>
+              {item.label}
+            </a>
+          </li>
+        );
+      })}
     </ul>
   </nav>
 </header>
@@ -22,11 +27,15 @@ const currentPath = Astro.url.pathname;
 <style>
   header {
     border-bottom: 1px solid var(--border-color);
-    padding: 1.5rem 1rem;
+    padding: 1.25rem 1rem;
+    background-color: var(--bg-primary);
+    position: sticky;
+    top: 0;
+    z-index: 10;
   }
 
   nav {
-    max-width: 700px;
+    max-width: 760px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -35,18 +44,20 @@ const currentPath = Astro.url.pathname;
 
   .logo {
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--text-primary);
+    text-decoration: none;
   }
 
   .logo:hover {
     color: var(--accent);
+    text-decoration: none;
   }
 
   ul {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 1.75rem;
     margin: 0;
     padding: 0;
   }
@@ -55,12 +66,29 @@ const currentPath = Astro.url.pathname;
     text-decoration: none;
     color: var(--text-secondary);
     font-size: 0.95rem;
+    font-weight: 500;
     transition: color 0.2s;
   }
 
-  a.active,
   a:hover {
-    color: var(--text-primary);
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  a.active {
+    color: var(--accent);
+    position: relative;
+  }
+
+  a.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.4rem;
+    height: 2px;
+    background-color: var(--accent);
+    border-radius: 2px;
   }
 
   @media (max-width: 640px) {
