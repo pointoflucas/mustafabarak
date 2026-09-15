@@ -1,7 +1,8 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://mustafabarak.github.io',
+  site: 'https://pointoflucas.github.io',
+  base: '/mustafabarak',
   output: 'static',
   integrations: [],
   markdown: {
