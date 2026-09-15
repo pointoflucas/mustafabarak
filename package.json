@@ -1,0 +1,21 @@
+{
+  "name": "mustafa-barak",
+  "version": "1.0.0",
+  "description": "Personal website of Mustafa Barak",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "sync": "astro sync"
+  },
+  "keywords": [
+    "astro",
+    "blog"
+  ],
+  "author": "Mustafa Barak",
+  "license": "MIT",
+  "dependencies": {
+    "astro": "^4.11.0"
+  }
+}

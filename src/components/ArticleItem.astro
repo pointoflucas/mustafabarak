@@ -1,0 +1,116 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  tags: string[];
+  href: string;
+  draft?: boolean;
+}
+
+const { title, description, date, tags, href, draft = false } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<article class="article">
+  <a href={href} class="article-link">
+    <h3>{title}</h3>
+  </a>
+  <p class="meta">
+    {formattedDate}
+    {draft && <span class="draft-badge">Draft</span>}
+  </p>
+  <p class="description">{description}</p>
+  <div class="tags">
+    {tags.map(tag => (
+      <a href={`/writing?tag=${tag}`} class="tag">
+        {tag}
+      </a>
+    ))}
+  </div>
+</article>
+
+<style>
+  .article {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .article:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .article-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .article-link:hover h3 {
+    color: var(--accent);
+  }
+
+  .meta {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .draft-badge {
+    display: inline-block;
+    padding: 0.1rem 0.4rem;
+    background-color: var(--accent);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 0.2rem;
+  }
+
+  .description {
+    margin: 0 0 1rem 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--bg-secondary);
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .tag:hover {
+    background-color: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+</style>

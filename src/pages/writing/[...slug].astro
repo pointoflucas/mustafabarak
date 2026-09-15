@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('writing');
+  return articles.map(article => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+interface Props {
+  article: any;
+}
+
+const { article } = Astro.props;
+const { Content } = await article.render();
+
+const formattedDate = article.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={article.data.title}>
+  <article>
+    <h1>{article.data.title}</h1>
+    <p class="meta">{formattedDate}</p>
+    <div class="content">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .meta {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+  }
+
+  .content {
+    line-height: 1.8;
+  }
+
+  :global(.content h2) {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  :global(.content p) {
+    margin-bottom: 1rem;
+  }
+
+  :global(.content ul, .content ol) {
+    margin-bottom: 1rem;
+  }
+
+  :global(.content li) {
+    margin-bottom: 0.5rem;
+  }
+</style>

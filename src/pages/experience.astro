@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { experiences } from '../data/experience';
+---
+
+<BaseLayout title="Experience">
+  <article>
+    <h1>Experience</h1>
+
+    <div class="timeline">
+      {experiences.map(exp => (
+        <div class="experience-item">
+          <div class="period">{exp.period}</div>
+          <div class="experience-content">
+            <h2>{exp.company}</h2>
+            <h3>{exp.title}</h3>
+            <p class="description">{exp.description}</p>
+            {exp.areas.length > 0 && (
+              <div class="areas">
+                <strong>Areas:</strong> {exp.areas.join(' · ')}
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <section class="education">
+      <h2>Education</h2>
+      <div class="experience-item">
+        <div class="period">2022</div>
+        <div class="experience-content">
+          <h2>Middle East Technical University (METU)</h2>
+          <h3>Bachelor of Engineering</h3>
+          <p>
+            Focus: Algorithms and Data Research
+          </p>
+        </div>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+  }
+
+  .timeline {
+    margin-bottom: 3rem;
+  }
+
+  .experience-item {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .experience-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .period {
+    flex-shrink: 0;
+    width: 150px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  .experience-content {
+    flex: 1;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+    margin: 0 0 0.25rem 0;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin: 0 0 1rem 0;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .description {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: var(--text-secondary);
+  }
+
+  .areas {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .education {
+    margin-top: 2rem;
+  }
+
+  .education h2 {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .experience-item {
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .period {
+      width: auto;
+      margin-bottom: 0.5rem;
+    }
+  }
+</style>

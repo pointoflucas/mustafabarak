@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RecommendationItem from '../components/RecommendationItem.astro';
+import { recommendations } from '../data/recommendations';
+
+// Group recommendations by category
+const categories = ['book', 'movie', 'music', 'article', 'tool', 'other'];
+const groupedRecs = categories.reduce(
+  (acc, cat) => {
+    acc[cat] = recommendations.filter(r => r.category === cat);
+    return acc;
+  },
+  {} as Record<string, any[]>
+);
+---
+
+<BaseLayout title="Recommendations">
+  <article>
+    <h1>Recommendations</h1>
+
+    <p class="intro">
+      Things I've read, watched or listened to that stayed with me.
+      Not necessarily the best things ever made, just things I found
+      interesting enough to recommend.
+    </p>
+
+    {Object.entries(groupedRecs).map(([category, items]) => {
+      if (items.length === 0) return null;
+
+      return (
+        <section class="category">
+          <h2>{category.charAt(0).toUpperCase() + category.slice(1)}s</h2>
+          <div class="items">
+            {items.map(item => (
+              <RecommendationItem
+                title={item.title}
+                creator={item.creator}
+                category={item.category}
+                year={item.year}
+                note={item.note}
+                link={item.link}
+              />
+            ))}
+          </div>
+        </section>
+      );
+    })}
+  </article>
+</BaseLayout>
+
+<style>
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  .intro {
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .category {
+    margin-bottom: 3rem;
+  }
+
+  .category h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .items {
+    margin-bottom: 1rem;
+  }
+</style>

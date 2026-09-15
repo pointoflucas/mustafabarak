@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+const articles = await getCollection('writing');
+
+const featuredProjects = projects
+  .filter(p => p.data.featured)
+  .sort((a, b) => b.data.year - a.data.year)
+  .slice(0, 3);
+
+const publishedArticles = articles
+  .filter(a => !a.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3);
+---
+
+<BaseLayout title="Home">
+  <section class="intro">
+    <h1>Mustafa Barak</h1>
+    <p>
+      Data & AI Engineer working at the intersection of data systems,
+      software engineering, and applied AI.
+    </p>
+    <p>
+      Over the years I've worked on data platforms, ML systems, RAG and
+      agentic AI across pharma, retail, finance, and venture capital.
+    </p>
+  </section>
+
+  {featuredProjects.length > 0 && (
+    <section class="section">
+      <h2>Projects</h2>
+      <ul>
+        {featuredProjects.map(project => (
+          <li>
+            <a href={`/projects/${project.slug}`}>{project.data.title}</a>
+            <span class="year">({project.data.year})</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {publishedArticles.length > 0 && (
+    <section class="section">
+      <h2>Writing</h2>
+      <ul>
+        {publishedArticles.map(article => (
+          <li>
+            <a href={`/writing/${article.slug}`}>{article.data.title}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  .intro p {
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+  }
+
+  .section {
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  a {
+    color: var(--accent);
+  }
+
+  .year {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+  }
+</style>

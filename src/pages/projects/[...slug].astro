@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(project => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: any;
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<BaseLayout title={project.data.title}>
+  <article>
+    <h1>{project.data.title}</h1>
+    <p class="meta">{project.data.year}</p>
+    <div class="content">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .meta {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+  }
+
+  .content {
+    line-height: 1.8;
+  }
+
+  :global(.content h2) {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  :global(.content p) {
+    margin-bottom: 1rem;
+  }
+
+  :global(.content ul, .content ol) {
+    margin-bottom: 1rem;
+  }
+
+  :global(.content li) {
+    margin-bottom: 0.5rem;
+  }
+</style>

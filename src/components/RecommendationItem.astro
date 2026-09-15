@@ -1,0 +1,67 @@
+---
+interface Props {
+  title: string;
+  creator?: string;
+  category: string;
+  year?: number;
+  note?: string;
+  link?: string;
+}
+
+const { title, creator, category, year, note, link } = Astro.props;
+---
+
+<div class="recommendation">
+  {link ? (
+    <a href={link} target="_blank" rel="noopener" class="title-link">
+      <h4>{title}</h4>
+    </a>
+  ) : (
+    <h4>{title}</h4>
+  )}
+  {creator && <p class="creator">{creator}</p>}
+  {note && <p class="note">{note}</p>}
+</div>
+
+<style>
+  .recommendation {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .recommendation:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .title-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .title-link:hover h4 {
+    color: var(--accent);
+  }
+
+  .creator {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .note {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+</style>
