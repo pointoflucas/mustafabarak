@@ -9,6 +9,7 @@ interface Props {
 const { title } = Astro.props;
 import { site } from '../data/site';
 import { withBase } from '../utils/url';
+import '../styles/global.css';
 
 const pageTitle = title ? `${title} — ${site.name}` : site.name;
 ---
@@ -21,7 +22,6 @@ const pageTitle = title ? `${title} — ${site.name}` : site.name;
     <link rel="icon" href={withBase('/favicon.ico')} />
     <title>{pageTitle}</title>
     <meta name="description" content={site.shortDescription} />
-    <link rel="stylesheet" href={withBase('/styles/global.css')} />
   </head>
   <body>
     <Header />

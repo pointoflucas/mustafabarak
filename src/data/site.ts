@@ -1,9 +1,9 @@
 export const site = {
   name: 'Mustafa Barak',
   shortDescription: 'Data & AI Engineer interested in data systems, AI, optimization, engineering culture, and the way technology changes how we think and work.',
-  email: 'hello@mustafabarak.com', // TODO: Update with your email
-  github: 'https://github.com/mustafabarak', // TODO: Update with your GitHub profile
-  linkedin: 'https://linkedin.com/in/mustafabarak', // TODO: Update with your LinkedIn profile
+  email: 'musstafabarak@gmail.com', // TODO: Update with your email
+  github: 'https://github.com/pointoflucas', // TODO: Update with your GitHub profile
+  linkedin: 'https://linkedin.com/in/mustafa-barak', // TODO: Update with your LinkedIn profile
   siteUrl: 'https://mustafabarak.com', // TODO: Update with your domain
 };
 
