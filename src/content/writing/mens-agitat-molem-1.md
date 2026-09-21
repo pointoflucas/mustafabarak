@@ -6,11 +6,12 @@ tags:
   - Philosophy
   - Psychology
   - Notes
-image: "/images/writing/mens-agitat-molem-1.png"
 draft: false
 ---
 
 How do we perceive reality? How can we say that something is real? What, truly, is reality? It is a fascinating realm of questions, and one can easily get lost in it. So perhaps it is better to begin with something easier: how do we perceive something tangible? We perceive the world through our senses. I can see, hear, touch, smell, and taste (though I keep Descartes's perspective on hallucinations in mind). Still, when I claim to know something about the physical world, observation gives me the most solid ground available to me. I can know that gravity exists and prove it with concrete evidence. I can know the boiling point of water and provide tangible proof through experimentation.
+
+![Mens agitat molem](/mustafabarak/images/writing/mens-agitat-molem-1.png)
 
 As I attempt to understand the universe, I ask questions and construct a mental world from the answers I find. Imagine a reality world in your mind: ask some questions to the universe and with the answers create mountains, farms, rivers. Some answers are supported by observation, measurement, and evidence. They form patches of solid ground on my mental map. The answers backed by concrete evidence form the solid ground of this world.
 

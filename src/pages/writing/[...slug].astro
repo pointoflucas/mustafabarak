@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { withBase } from '../../utils/url';
 
 export async function getStaticPaths() {
   const articles = await getCollection('writing');
@@ -29,11 +28,6 @@ const formattedDate = article.data.date.toLocaleDateString('en-US', {
   <article>
     <h1>{article.data.title}</h1>
     <p class="meta">{formattedDate}</p>
-    {article.data.image && (
-      <figure class="feature-image">
-        <img src={withBase(article.data.image)} alt="" />
-      </figure>
-    )}
     <div class="content">
       <Content />
     </div>
@@ -53,18 +47,6 @@ const formattedDate = article.data.date.toLocaleDateString('en-US', {
     padding-bottom: 1rem;
   }
 
-  .feature-image {
-    margin: 2rem 0 3rem;
-  }
-
-  .feature-image img {
-    display: block;
-    width: 100%;
-    max-height: 520px;
-    object-fit: cover;
-    border: 1px solid var(--border-color);
-  }
-
   .content {
     line-height: 1.8;
   }
@@ -76,6 +58,14 @@ const formattedDate = article.data.date.toLocaleDateString('en-US', {
 
   :global(.content p) {
     margin-bottom: 1rem;
+  }
+
+  :global(.content img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 2rem 0 2.5rem;
+    border: 1px solid var(--border-color);
   }
 
   :global(.content ul, .content ol) {
