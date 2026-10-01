@@ -1,5 +1,5 @@
 ---
-title: "# How to Watch Football Better — Without Rewatching the Match"
+title: "How to Watch Football Better — Without Rewatching the Match"
 description: "You can understand the intentional tactics of the coaches if you pay particular attention to some points in a match"
 date: 2026-09-30
 tags:
