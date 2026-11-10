@@ -1,0 +1,1125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const sections = [
+  { id: 'agile', number: '01', title: 'Agile in data & AI' },
+  { id: 'backlog', number: '02', title: 'Plan the work' },
+  { id: 'experiments', number: '03', title: 'Learn through experiments' },
+  { id: 'collaboration', number: '04', title: 'Work as a team' },
+  { id: 'quality', number: '05', title: 'Build quality in' },
+  { id: 'delivery', number: '06', title: 'Deliver continuously' },
+  { id: 'workshop', number: '07', title: 'Improve your project' },
+];
+---
+
+<BaseLayout title="Agile for Data & AI Projects" wide>
+  <div class="lecture">
+    <header class="lecture-heading">
+      <div class="hero-copy">
+        <p class="eyebrow">MSc lecture · Data &amp; AI engineering</p>
+        <h1>Agile for<br />Data &amp; AI</h1>
+        <p class="dek">Build a little. Learn a lot. Ship what works.</p>
+        <div class="lecture-meta">
+          <span>One case: a RAG assistant</span>
+          <span>7 chapters · 1 team challenge</span>
+        </div>
+      </div>
+      <svg class="hero-loop" viewBox="0 0 480 330" role="img" aria-labelledby="loop-title loop-description">
+        <title id="loop-title">The Agile learning loop</title>
+        <desc id="loop-description">Build a small increment, measure it, learn from feedback, and adapt the next step.</desc>
+        <defs>
+          <marker id="loop-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+            <path d="M0 0L10 5L0 10Z" fill="#d9573b" />
+          </marker>
+        </defs>
+        <path class="loop-path" d="M155 72 C265 25 364 75 380 141 M391 185 C373 269 278 302 194 274 M145 256 C57 219 42 150 88 104 M117 80 C125 75 135 72 146 69" fill="none" stroke="#d9573b" stroke-width="4" stroke-linecap="round" marker-end="url(#loop-arrow)" />
+        <circle cx="145" cy="70" r="53" fill="#d9eee2" />
+        <circle cx="386" cy="163" r="53" fill="#f7d96c" />
+        <circle cx="169" cy="270" r="53" fill="#f2c9b9" />
+        <circle cx="90" cy="130" r="0" fill="none" />
+        <circle cx="92" cy="130" r="53" fill="#b9dce6" />
+        <text x="145" y="66" text-anchor="middle">BUILD</text>
+        <text x="145" y="86" text-anchor="middle" class="loop-sub">small increment</text>
+        <text x="386" y="159" text-anchor="middle">MEASURE</text>
+        <text x="386" y="179" text-anchor="middle" class="loop-sub">real evidence</text>
+        <text x="169" y="266" text-anchor="middle">LEARN</text>
+        <text x="169" y="286" text-anchor="middle" class="loop-sub">what worked?</text>
+        <text x="92" y="126" text-anchor="middle">ADAPT</text>
+        <text x="92" y="146" text-anchor="middle" class="loop-sub">next step</text>
+        <text x="252" y="160" text-anchor="middle" class="loop-center">USER VALUE</text>
+        <text x="252" y="181" text-anchor="middle" class="loop-sub">the point of the loop</text>
+      </svg>
+    </header>
+
+    <div class="lecture-grid">
+      <aside class="contents" aria-label="Lecture sections">
+        <p class="contents-label">Lecture map</p>
+        <nav>
+          {sections.map(section => (
+            <a href={`#${section.id}`}>
+              <span class="contents-number">{section.number}</span>
+              <span class="contents-title">{section.title}</span>
+            </a>
+          ))}
+        </nav>
+      </aside>
+
+      <div class="lecture-content">
+        <section class="opening" aria-labelledby="outcomes-title">
+          <div>
+            <p class="eyebrow">Our running case</p>
+            <h2 id="outcomes-title">A RAG assistant for course documents.</h2>
+          </div>
+          <div>
+            <p>
+              Our example is a Q&amp;A assistant for course documents. We want
+              students to get accurate answers with links to their sources.
+              If an answer is wrong, first check where the process failed.
+            </p>
+            <p>
+              Was the document loaded? Did search find the right passage? Did
+              the AI misuse it? Was the system too slow? Each problem needs a
+              different fix. Finding the cause tells the team what to improve
+              next.
+            </p>
+            <div class="case-flow" aria-label="RAG assistant workflow">
+              <span>Course docs</span><b>→</b><span>Find evidence</span><b>→</b><span>Answer + cite</span><b>→</b><span>Student checks</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="agile" class="topic">
+          <div class="topic-heading">
+            <p class="eyebrow">01 / The mindset</p>
+            <h2>Agile in data &amp; AI</h2>
+          </div>
+          <div class="topic-body">
+            <p>
+              <strong>Iterative</strong> work improves a solution through
+              feedback. <strong>Incremental</strong> work adds a usable piece
+              at a time. Data and AI teams need both: a small capability to try,
+              followed by evidence that helps choose the next step.
+            </p>
+            <div class="contrast">
+              <div>
+                <span class="label">Activity</span>
+                <p>“We spent two weeks improving the embedding pipeline.”</p>
+              </div>
+              <div>
+                <span class="label">Outcome</span>
+                <p>“More relevant evidence appears in the top five results.”</p>
+              </div>
+            </div>
+            <p class="prompt"><strong>Ask:</strong> Better for whom? Better by what measure?</p>
+            <p>
+              These teams manage two kinds of work. <strong>Discovery</strong>
+              tests whether the data, model, or product idea is viable.
+              <strong>Delivery</strong> turns what has been learned into a
+              dependable capability. Keep both visible in the backlog; a
+              research task should end with a decision or a next experiment.
+            </p>
+            <div class="sequence" aria-label="Typical data product flow">
+              <span>Source</span><b>→</b><span>Ingest</span><b>→</b><span>Validate</span><b>→</b><span>Transform / model</span><b>→</b><span>Serve</span><b>→</b><span>Monitor</span>
+            </div>
+            <p>
+              Each handoff is a chance for assumptions to break: a source adds
+              a column, a batch arrives late, a feature is missing, or a
+              dashboard silently goes stale. A data product is not finished
+              when a notebook runs; it is useful when consumers can trust its
+              meaning, freshness, and failure signals.
+            </p>
+            <p class="takeaway">A completed ticket is activity. A measured improvement is evidence.</p>
+          </div>
+        </section>
+
+        <section id="backlog" class="topic">
+          <div class="topic-heading">
+            <p class="eyebrow">02 / Shape valuable work</p>
+            <h2>Plan the work</h2>
+          </div>
+          <div class="topic-body">
+            <p>Slice work vertically: one small capability a student can try, from ingestion through a cited answer.</p>
+            <div class="sequence" aria-label="Backlog hierarchy">
+              <span>Product goal</span><b>→</b><span>Epic</span><b>→</b><span>User story</span><b>→</b><span>Engineering tasks</span>
+            </div>
+            <p>
+              During refinement, ask four questions: Who benefits? What is the
+              smallest useful outcome? What is still unknown? How will we
+              verify it? If retrieval quality is unknown, test it before
+              polishing the interface. Agree on data and API contracts early
+              when parallel work depends on them.
+            </p>
+            <div class="sequence" aria-label="Example vertical slice">
+              <span>One document source</span><b>→</b><span>Validated index</span><b>→</b><span>Cited answer</span><b>→</b><span>Student feedback</span>
+            </div>
+            <p>
+              This slice is small on purpose: one collection, one ingestion
+              path, a few representative questions, and a complete user flow.
+              The team can learn whether ingestion, retrieval, and citations
+              work together before adding more sources or tuning performance.
+            </p>
+            <div class="artifact">
+              <div class="artifact-heading">
+                <span class="label">Example ticket</span>
+                <code>RAG-104</code>
+              </div>
+              <h3>Return source-grounded answers</h3>
+              <p class="story">As a user, I want answers supported by references so that I can verify them.</p>
+              <div class="criteria">
+                <span class="label">Acceptance criteria</span>
+                <ul>
+                  <li>Answer and source references are returned together.</li>
+                  <li>Restricted documents stay restricted.</li>
+                  <li>Weak evidence triggers an uncertainty response.</li>
+                  <li>Every citation resolves to the exact source version used.</li>
+                </ul>
+              </div>
+              <p class="task-line"><strong>Build:</strong> API contract · retrieval + generation · citation checks · sample questions</p>
+            </div>
+            <p>
+              A useful data contract makes the boundaries testable: required
+              fields and types, key uniqueness, timestamp meaning, allowed
+              nulls, and what happens when the contract changes. For this
+              example, define a stable document ID and source version; do not
+              let a display title become the identity of a document.
+            </p>
+            <p class="takeaway">
+              Separate the user outcome from implementation tasks. Acceptance
+              criteria should be observable, testable, and explicit about
+              failure behavior, not just the successful path.
+            </p>
+          </div>
+        </section>
+
+        <section id="experiments" class="topic">
+          <div class="topic-heading">
+            <p class="eyebrow">03 / Make uncertainty visible</p>
+            <h2>Learn through experiments</h2>
+          </div>
+          <div class="topic-body">
+            <p>
+              When a technical choice is uncertain, run a time-boxed
+              <strong>spike</strong>. It should answer one question and end
+              with evidence, a recommendation, or a smaller follow-up question;
+              it does not need to produce production code.
+            </p>
+            <div class="experiment-table" role="table" aria-label="Chunking experiment plan">
+              <div role="row"><span role="cell">Question</span><span role="cell">Will smaller chunks improve retrieval?</span></div>
+              <div role="row"><span role="cell">Baseline</span><span role="cell">Current chunking strategy</span></div>
+              <div role="row"><span role="cell">Experiment</span><span role="cell">Compare two chunk sizes on the same query set</span></div>
+              <div role="row"><span role="cell">Measures</span><span role="cell">Recall@5, ranking quality, latency</span></div>
+              <div role="row"><span role="cell">Time-box</span><span role="cell">Agree on a deadline; publish results and recommendation</span></div>
+            </div>
+            <p>
+              <strong>Recall@5</strong> measures how often relevant evidence
+              appears in the first five results. Use the same representative
+              queries and relevance labels for each run. Keep the embedding
+              model and other settings fixed while comparing chunk sizes, then
+              check latency as well as retrieval quality.
+            </p>
+            <p>
+              For model experiments, protect the evaluation set from tuning.
+              Use a time-based split when the product predicts future events,
+              and check that user, entity, or duplicate records have not leaked
+              across train and test. Otherwise a strong score may measure
+              memorization rather than generalization.
+            </p>
+            <p>
+              Save the dataset version, configuration, results, and caveats so
+              another teammate can reproduce the comparison. If a change
+              improves the average but hurts an important class of questions,
+              inspect that slice before deciding it is better.
+            </p>
+            <p>
+              Keep a compact experiment record: question, baseline, data
+              version, code commit, parameters, metric results, runtime, and
+              decision. If labels are expensive, begin with a small reviewed
+              sample and make its limitations explicit instead of claiming
+              broad certainty from a tiny benchmark.
+            </p>
+            <p class="takeaway">Record consequential choices as short decision notes: context → options → decision → consequences. A failed experiment is still useful if it changes what the team knows.</p>
+          </div>
+        </section>
+
+        <section id="collaboration" class="topic">
+          <div class="topic-heading">
+            <p class="eyebrow">04 / Coordinate the work</p>
+            <h2>Work as a team</h2>
+          </div>
+          <div class="topic-body">
+            <p>
+              Use team routines to coordinate, not to report status upward.
+              Planning aligns on one measurable goal and realistic capacity.
+              Daily coordination surfaces blockers and handoffs. Refinement
+              resolves unclear assumptions before work is committed.
+            </p>
+            <div class="workflow" aria-label="Example engineering workflow">
+              <span>GitHub issue</span><b>→</b><span>Short-lived branch</span><b>→</b><span>Pull request</span><b>→</b><span>Actions checks + review</span><b>→</b><span>Merge</span>
+            </div>
+            <p>
+              Link each branch and pull request to a small issue. A pull request
+              should say what problem it solves, how it was tested, what data
+              or schema changes, and any deployment or rollback concern. Keep
+              it narrow enough that a reviewer can understand the change
+              without reconstructing the whole project.
+            </p>
+            <p>
+              Small pull requests make review easier and integration problems
+              cheaper. A <strong>work-in-progress limit</strong> makes hidden
+              queues visible and encourages pairing or swarming on blocked
+              work. Agree on interface contracts so teammates can work in
+              parallel without guessing what the other component expects.
+            </p>
+            <p>
+              Review more than code style: check join keys and filters in SQL,
+              null and duplicate handling, schema compatibility, permissions,
+              test coverage, and whether a backfill is safe to rerun. Use a
+              synthetic or sanitized fixture in reviews; avoid copying
+              production personal data into issues, notebook outputs, or logs.
+            </p>
+            <p>
+              In a review, demonstrate a working increment and ask stakeholders
+              what they learned. In a retrospective, choose one change the team
+              can test in its next cycle, then check whether it helped.
+            </p>
+            <p class="prompt"><strong>Discuss:</strong> Should everyone build a separate component for two weeks, or should the team collaborate to finish one end-to-end feature?</p>
+            <p class="takeaway">Share ownership of the product and its quality. Never use story points as an individual productivity score.</p>
+          </div>
+        </section>
+
+        <section id="quality" class="topic">
+          <div class="topic-heading">
+            <p class="eyebrow">05 / Define quality</p>
+            <h2>Build quality in</h2>
+          </div>
+          <div class="topic-body">
+            <p>Software tests and AI evaluations catch different failures. You need both.</p>
+            <div class="quality-grid">
+              <div><span class="label">Unit</span><p>Does chunking preserve metadata? Do transformations handle nulls and boundaries?</p></div>
+              <div><span class="label">Integration</span><p>Does retrieval work with the vector store and the expected schema?</p></div>
+              <div><span class="label">Data quality</span><p>Are keys unique? Are fields valid, fresh, and within expected ranges?</p></div>
+              <div><span class="label">AI evaluation</span><p>Are answers grounded? Do citations support the claims?</p></div>
+              <div><span class="label">End-to-end</span><p>Can a user upload, index, ask, and verify?</p></div>
+              <div><span class="label">Non-functional</span><p>Are latency, access control, cost, and recovery acceptable?</p></div>
+            </div>
+            <p>
+              Test data rules at the boundary where bad data enters. Examples
+              include uniqueness of business keys, non-null identifiers,
+              accepted value ranges, referential integrity, freshness, and
+              expected volume. Test transformations with small fixtures and
+              test the full ingestion path with representative files. For
+              incremental jobs, verify both first load and rerun behavior.
+            </p>
+            <div class="layers">
+              <div><span class="label">Retrieval</span><strong>Did we find the right context?</strong><small>Recall@k · Precision@k · nDCG</small></div>
+              <div><span class="label">Generation</span><strong>Is the answer supported?</strong><small>Groundedness · correctness · citation validity</small></div>
+              <div><span class="label">System</span><strong>Does it work for people?</strong><small>Latency · failure rate · cost · feedback</small></div>
+            </div>
+            <p>
+              Diagnose failures at the right layer: missing evidence points to
+              retrieval; unsupported claims point to generation; slow or
+              expensive responses point to system design. A single overall
+              score can hide these differences, so inspect results by query
+              type and failure mode.
+            </p>
+            <p>
+              Keep evaluation examples representative and versioned. Automated
+              judges are useful for scale, but review a sample with people and
+              check that citations actually support the answer. Set release
+              thresholds for critical behaviors, such as access control and
+              citation validity, as well as acceptable quality regressions.
+            </p>
+            <p>
+              A model-quality check is not a substitute for production
+              monitoring. Compare incoming data with the assumptions used in
+              training, watch for missing or shifted features, and track
+              quality by important user or business segments where appropriate.
+              Data drift is a signal to investigate; it does not by itself prove
+              that model performance has fallen.
+            </p>
+            <div class="done-definition">
+              <span class="label">A team's Definition of Done</span>
+              <p>Reviewed and merged; relevant tests and data checks pass; evaluation has no unacceptable regression; access and failure paths are checked; documentation and monitoring are ready; the increment is deployable and demonstrable.</p>
+            </div>
+            <p class="takeaway">Quality is part of completion, not a phase after feature work. Validate important changes in an environment close to where they will run.</p>
+          </div>
+        </section>
+
+        <section id="delivery" class="topic">
+          <div class="topic-heading">
+            <p class="eyebrow">06 / Release with confidence</p>
+            <h2>Deliver continuously</h2>
+          </div>
+          <div class="topic-body">
+            <p>Continuous Delivery means always being ready to release, not releasing every change immediately.</p>
+            <div class="pipeline" aria-label="Example delivery pipeline">
+              <div><span>01</span><strong>Pull request</strong><small>Lint · unit tests · fast evaluation</small></div>
+              <b>→</b>
+              <div><span>02</span><strong>Integration</strong><small>Data checks · broader regression suite</small></div>
+              <b>→</b>
+              <div><span>03</span><strong>Staging</strong><small>Validate · promote · rollback ready</small></div>
+              <b>→</b>
+              <div><span>04</span><strong>Production</strong><small>Monitor errors · latency · cost · quality</small></div>
+            </div>
+            <div class="artifact">
+              <div class="artifact-heading">
+                <span class="label">GitHub Actions · CI on pull requests</span>
+                <code>.github/workflows/data-ci.yml</code>
+              </div>
+              <pre class="github-workflow"><code>name: data-ci
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-dev.txt
+      - run: ruff check .
+      - run: python -m pytest
+      - run: python scripts/check_data_contracts.py
+      - run: python scripts/evaluate_smoke.py</code></pre>
+              <p class="task-line">The script paths are examples: point them at checks that exist in your repository. Keep pull-request checks fast and use small, non-sensitive fixtures.</p>
+            </div>
+            <p>
+              Keep pull-request checks fast so developers get feedback while
+              the change is fresh. Run broader regression evaluations before
+              promotion. Separate configuration and secrets from code, and
+              make each step's release criteria explicit. A staging check and
+              a rollback path reduce the cost of discovering a production
+              problem.
+            </p>
+            <p>
+              In GitHub, protect <code>main</code> with a ruleset: require
+              pull requests, at least one review, and the CI status checks
+              before merge. Require the checks that matter, not optional jobs
+              that do not run for every change. This prevents “green locally,
+              broken on main” from becoming the normal workflow.
+            </p>
+            <p>
+              Version prompts, model settings, dependencies, and evaluation
+              data. In production, monitor errors, latency, cost, empty or
+              irrelevant retrievals, and user feedback. For ingestion jobs,
+              design retries so a repeated run does not create duplicate or
+              inconsistent data.
+            </p>
+            <p>
+              Use GitHub Environments to separate staging and production
+              deployment settings. Put credentials in environment secrets or
+              use the cloud provider's short-lived identity integration; never
+              commit credentials or expose deployment secrets to untrusted
+              pull-request code. Require an approval for production when the
+              risk warrants it, and keep a rollback or disable path ready.
+            </p>
+            <p>
+              Keep large datasets and model artifacts in versioned storage or
+              a model registry, not Git history. A deployment should identify
+              the code, data snapshot, model, and configuration it uses so the
+              team can reproduce a result or roll back a bad release.
+            </p>
+            <p class="takeaway">Automation should shorten feedback time and make release risk visible—not just move code between environments.</p>
+          </div>
+        </section>
+
+        <section id="workshop" class="workshop">
+          <div class="topic-heading">
+            <p class="eyebrow">07 / Team exercise</p>
+            <h2>Improve your current project</h2>
+          </div>
+          <div class="topic-body">
+            <p>
+              Work with your semester team on a real next step. Capture your
+              answers in one short improvement plan; choose work you can
+              actually try, not an idealized process redesign.
+            </p>
+            <ol class="workshop-steps">
+              <li><span>01</span><strong>Set the next sprint goal</strong><small>Describe an outcome for a user, not a list of tasks. Decide what evidence will show progress.</small></li>
+              <li><span>02</span><strong>Refine the backlog</strong><small>Choose three small stories. Mark the riskiest assumption and any data, API, or teammate dependency.</small></li>
+              <li><span>03</span><strong>Define quality gates</strong><small>Write a Definition of Done that includes tests, data quality, evaluation, and a demonstrable increment.</small></li>
+              <li><span>04</span><strong>Name the biggest risk</strong><small>Choose a spike or mitigation, and state what result would change your plan.</small></li>
+              <li><span>05</span><strong>Share one improvement</strong><small>Commit to one action, name its owner, and decide when the team will review its effect.</small></li>
+            </ol>
+            <p class="prompt"><strong>Before you share:</strong> Is your biggest constraint technical uncertainty, collaboration, scope, integration, or quality? What is one small change that would tell you whether it helped?</p>
+          </div>
+        </section>
+
+        <footer class="closing">
+          <p class="eyebrow">Take this into your next sprint</p>
+          <h2>Deliver vertically. Make uncertainty explicit. Build quality in. Integrate early. Measure outcomes.</h2>
+          <p>Agile helps a team decide what to build, learn what works, collaborate effectively, and deliver reliable products through continuous feedback.</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  :global(body) {
+    background: #f1f5ee;
+  }
+
+  .lecture {
+    --lecture-ink: #18352e;
+    --lecture-muted: #415e55;
+    --lecture-line: #b7ccc0;
+    --lecture-accent: #c6422c;
+    --lecture-paper: #e2eee5;
+    --lecture-yellow: #f4d45f;
+    max-width: none;
+    min-height: 100vh;
+    padding: 2rem clamp(1.25rem, 4vw, 4rem) 5rem;
+    color: var(--lecture-ink);
+    background: #f1f5ee;
+  }
+
+  .lecture-heading {
+    display: grid;
+    max-width: 1180px;
+    margin: 0 auto;
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 0.9fr);
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 0 2.5rem;
+    border-bottom: 1px solid var(--lecture-line);
+  }
+
+  .hero-copy {
+    max-width: 620px;
+  }
+
+  .eyebrow,
+  .label,
+  .lecture-meta,
+  .contents,
+  .sequence,
+  .workflow,
+  .pipeline,
+  .workshop-steps,
+  code {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  .eyebrow,
+  .label {
+    color: var(--lecture-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .lecture-heading h1 {
+    margin: 0.75rem 0 1rem;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(3rem, 5vw, 4.4rem);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 0.98;
+    color: var(--lecture-ink);
+  }
+
+  .dek {
+    max-width: 640px;
+    margin: 1.25rem 0 1.5rem;
+    color: var(--lecture-ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.55rem;
+    line-height: 1.45;
+  }
+
+  .hero-loop {
+    display: block;
+    width: min(100%, 460px);
+    justify-self: center;
+    overflow: visible;
+  }
+
+  .hero-loop text {
+    fill: var(--lecture-ink);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .hero-loop .loop-sub {
+    fill: #314d45;
+    font-size: 10px;
+    font-weight: 500;
+  }
+
+  .hero-loop .loop-center {
+    fill: var(--lecture-accent);
+    font-size: 12px;
+  }
+
+  .lecture-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    color: var(--lecture-muted);
+    font-size: 0.82rem;
+  }
+
+  .lecture-grid {
+    display: grid;
+    max-width: 1180px;
+    margin: 0 auto;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: start;
+    padding-top: 2.25rem;
+  }
+
+  .contents {
+    position: sticky;
+    top: 1rem;
+    padding-top: 0.5rem;
+    font-size: 0.82rem;
+  }
+
+  .contents-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    color: var(--lecture-ink);
+    font-weight: 700;
+  }
+
+  .contents-label span,
+  .contents-time {
+    color: var(--lecture-muted);
+    font-weight: 400;
+  }
+
+  .contents nav {
+    display: grid;
+  }
+
+  .contents a {
+    display: grid;
+    grid-template-columns: 1.7rem minmax(0, 1fr) auto;
+    gap: 0.4rem;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--lecture-line);
+    color: var(--lecture-muted);
+    text-decoration: none;
+  }
+
+  .contents a:hover,
+  .contents a:focus-visible {
+    color: var(--lecture-accent);
+  }
+
+  .contents-number {
+    color: var(--lecture-accent);
+  }
+
+  .lecture-content {
+    min-width: 0;
+  }
+
+  .opening,
+  .topic {
+    display: grid;
+    grid-template-columns: minmax(150px, 0.7fr) minmax(0, 1.5fr);
+    gap: 1.5rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--lecture-line);
+    scroll-margin-top: 1.5rem;
+  }
+
+  .opening {
+    padding-top: 0.5rem;
+  }
+
+  .opening h2,
+  .topic h2,
+  .closing h2 {
+    margin: 0.5rem 0 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.65rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.2;
+    color: var(--lecture-ink);
+  }
+
+  .topic-heading .eyebrow {
+    white-space: nowrap;
+  }
+
+  .topic-body > p,
+  .opening > div:last-child > p {
+    margin: 0 0 1rem;
+  }
+
+  .outcome-line,
+  .takeaway {
+    color: var(--lecture-muted);
+  }
+
+  .case-flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 1rem;
+    margin: 1.25rem 0 0;
+    background: #dcebe1;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .case-flow b {
+    color: var(--lecture-accent);
+    font-size: 1rem;
+  }
+
+  .contrast,
+  .quality-grid,
+  .layers {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--lecture-line);
+    border-left: 1px solid var(--lecture-line);
+    margin: 1.5rem 0;
+  }
+
+  .contrast > div,
+  .quality-grid > div,
+  .layers > div {
+    padding: 0.9rem 1rem;
+    border-right: 1px solid var(--lecture-line);
+    border-bottom: 1px solid var(--lecture-line);
+    background: #fbfcf8;
+  }
+
+  .contrast > div:first-child {
+    background: #f8e9df;
+  }
+
+  .contrast > div:last-child {
+    background: #e2eee5;
+  }
+
+  .contrast p,
+  .quality-grid p {
+    margin: 0.4rem 0 0;
+  }
+
+  .prompt {
+    padding: 0.75rem 1rem;
+    border-left: 3px solid var(--lecture-accent);
+    background: var(--lecture-paper);
+  }
+
+  .topic-body > .takeaway {
+    margin-top: 1.25rem;
+    font-size: 0.94rem;
+  }
+
+  .sequence,
+  .workflow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 1rem 0;
+    margin: 1.25rem 0;
+    border-top: 1px solid var(--lecture-line);
+    border-bottom: 1px solid var(--lecture-line);
+    font-size: 0.84rem;
+  }
+
+  .sequence span,
+  .workflow span {
+    font-weight: 600;
+  }
+
+  .sequence b,
+  .workflow b {
+    color: var(--lecture-accent);
+  }
+
+  .artifact {
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+    border: 1px solid #a9c2b5;
+    border-top: 4px solid var(--lecture-accent);
+    background: #fbfcf8;
+  }
+
+  .github-workflow {
+    max-width: 100%;
+    padding: 1rem;
+    overflow-x: auto;
+    background: var(--lecture-ink);
+    color: #f1f5ee;
+    white-space: pre;
+  }
+
+  .github-workflow code {
+    display: block;
+    padding: 0;
+    background: none;
+    color: inherit;
+    font-size: 0.8rem;
+    line-height: 1.55;
+  }
+
+  .artifact-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  code {
+    background: var(--lecture-paper);
+    padding: 0.2rem 0.4rem;
+    border-radius: 2px;
+    color: var(--lecture-ink);
+  }
+
+  .artifact h3 {
+    margin: 0.6rem 0;
+    font-size: 1.15rem;
+  }
+
+  .story {
+    color: var(--lecture-muted);
+  }
+
+  .criteria ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1.2rem;
+  }
+
+  .criteria li {
+    margin-bottom: 0.35rem;
+  }
+
+  .task-line {
+    margin: 1rem 0 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--lecture-line);
+    font-size: 0.9rem;
+  }
+
+  .experiment-table {
+    margin: 1.25rem 0;
+    border-top: 1px solid var(--lecture-line);
+    background: #fbfcf8;
+  }
+
+  .experiment-table [role='row'] {
+    display: grid;
+    grid-template-columns: minmax(90px, 0.55fr) minmax(0, 1.6fr);
+    gap: 1rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--lecture-line);
+  }
+
+  .experiment-table [role='cell']:first-child {
+    color: var(--lecture-accent);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .experiment-table [role='cell']:last-child {
+    color: var(--lecture-ink);
+  }
+
+  .quality-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .quality-grid p {
+    font-size: 0.88rem;
+  }
+
+  .quality-grid > div:nth-child(3n + 1) {
+    background: #e2eee5;
+  }
+
+  .quality-grid > div:nth-child(3n + 2) {
+    background: #fbecba;
+  }
+
+  .quality-grid > div:nth-child(3n) {
+    background: #f8e9df;
+  }
+
+  .layers {
+    grid-template-columns: 1fr;
+  }
+
+  .layers > div {
+    display: grid;
+    grid-template-columns: 100px minmax(0, 1fr);
+    gap: 0.25rem 1rem;
+  }
+
+  .layers > div:nth-child(1) {
+    background: #dcebe1;
+  }
+
+  .layers > div:nth-child(2) {
+    background: #fbecba;
+  }
+
+  .layers > div:nth-child(3) {
+    background: #f8e9df;
+  }
+
+  .layers .label {
+    grid-row: span 2;
+  }
+
+  .layers strong {
+    font-weight: 600;
+  }
+
+  .layers small {
+    color: var(--lecture-muted);
+    font-size: 0.82rem;
+  }
+
+  .done-definition {
+    padding: 1rem;
+    margin: 1.25rem 0;
+    border-left: 4px solid #147464;
+    background: #dcebe1;
+  }
+
+  .done-definition p {
+    margin: 0.4rem 0 0;
+    font-weight: 600;
+  }
+
+  .pipeline {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.6rem;
+    margin: 1.5rem 0;
+  }
+
+  .pipeline > div {
+    display: grid;
+    gap: 0.25rem;
+    align-content: start;
+    min-height: 112px;
+    padding: 0.8rem;
+    border-top: 4px solid var(--lecture-accent);
+    background: #fbfcf8;
+  }
+
+  .pipeline > div:nth-of-type(2) {
+    border-color: #147464;
+  }
+
+  .pipeline > div:nth-of-type(3) {
+    border-color: #d4a700;
+  }
+
+  .pipeline > div:nth-of-type(4) {
+    border-color: #487d91;
+  }
+
+  .pipeline > b {
+    color: var(--lecture-accent);
+  }
+
+  .pipeline span,
+  .pipeline small {
+    color: var(--lecture-muted);
+    font-size: 0.75rem;
+  }
+
+  .pipeline strong {
+    font-size: 0.88rem;
+  }
+
+  .workshop {
+    padding: 2.5rem 1.5rem;
+    margin-top: 2.5rem;
+    background: #dcebe1;
+    scroll-margin-top: 1.5rem;
+  }
+
+  .workshop .topic-heading {
+    margin-bottom: 1.5rem;
+  }
+
+  .workshop-steps {
+    list-style: none;
+    margin: 1.25rem 0;
+    padding: 0;
+    border-top: 1px solid var(--lecture-line);
+  }
+
+  .workshop-steps li {
+    display: grid;
+    grid-template-columns: 55px minmax(0, 1fr);
+    gap: 0.2rem 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--lecture-line);
+  }
+
+  .workshop-steps li > span {
+    grid-row: span 2;
+    color: var(--lecture-accent);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .workshop-steps strong {
+    font-size: 0.9rem;
+  }
+
+  .workshop-steps small {
+    color: var(--lecture-muted);
+    font-size: 0.84rem;
+  }
+
+  .closing {
+    padding: 3rem 0 0;
+  }
+
+  .closing h2 {
+    max-width: 650px;
+    font-size: 2rem;
+  }
+
+  .closing > p:last-child {
+    max-width: 600px;
+    margin: 1rem 0 0;
+    color: var(--lecture-muted);
+  }
+
+  @media (max-width: 800px) {
+    .lecture-heading {
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.8fr);
+      gap: 1rem;
+    }
+
+    .lecture-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .contents {
+      position: static;
+      overflow-x: auto;
+      padding: 0 0 0.5rem;
+    }
+
+    .contents-label {
+      max-width: 100%;
+    }
+
+    .contents nav {
+      display: flex;
+      width: max-content;
+      gap: 1rem;
+    }
+
+    .contents a {
+      grid-template-columns: auto auto;
+      gap: 0.25rem 0.4rem;
+      min-width: 145px;
+    }
+
+    .contents-number {
+      grid-row: span 2;
+    }
+
+    .contents-time {
+      grid-column: 2;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .lecture {
+      padding: 1rem 1.25rem 3rem;
+    }
+
+    .lecture-heading {
+      grid-template-columns: 1fr;
+      padding-top: 2rem;
+    }
+
+    .hero-loop {
+      width: min(100%, 390px);
+      margin: 0 auto;
+    }
+
+    .lecture-heading h1 {
+      font-size: 3.1rem;
+    }
+
+    .dek {
+      font-size: 1.2rem;
+    }
+
+    .opening,
+    .topic {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+      padding: 1.75rem 0;
+    }
+
+    .topic-heading .eyebrow {
+      white-space: normal;
+    }
+
+    .opening h2,
+    .topic h2 {
+      font-size: 1.45rem;
+    }
+
+    .quality-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .layers > div {
+      grid-template-columns: 1fr;
+    }
+
+    .layers .label {
+      grid-row: auto;
+    }
+
+    .pipeline {
+      grid-template-columns: 1fr;
+    }
+
+    .pipeline > div {
+      min-height: auto;
+    }
+
+    .pipeline > b {
+      transform: rotate(90deg);
+      justify-self: center;
+    }
+
+    .workshop {
+      padding: 1.5rem 1rem;
+    }
+
+    .closing h2 {
+      font-size: 1.7rem;
+    }
+  }
+</style>
